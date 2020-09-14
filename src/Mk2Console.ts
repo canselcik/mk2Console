@@ -128,16 +128,16 @@ function log(msg: any, color: string = '', fontWeight: string = 'normal') {
 function parseHttpLinks(text: string): {startIndex: number, value: string}[] {
     // Looks back at a whitespace, grabs any non whitespace character 
     // before http, www. or .com-like domains if there is and any after until a whitespace.
-    const httpRegex = /((?<=\s)[\S]+)?(http|www\.|\.com|\.co.uk|\.io|\.org|\.edu).+?(?=\s)/gm
+    //const httpRegex = /((?<=\s)[\S]+)?(http|www\.|\.com|\.co.uk|\.io|\.org|\.edu).+?(?=\s)/gm
 
     var results = []
-    var matches = []
-    while ((matches = httpRegex.exec(text)) !== null) {
-        results.push({
-            startIndex: httpRegex.lastIndex - matches[0].length,
-            value: matches[0]
-        })
-    }
+    //var matches = []
+    //while ((matches = httpRegex.exec(text)) !== null) {
+    //    results.push({
+    //        startIndex: httpRegex.lastIndex - matches[0].length,
+    //        value: matches[0]
+    //    })
+    //}
 
     return results
 }
