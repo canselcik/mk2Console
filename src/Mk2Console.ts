@@ -74,30 +74,8 @@ function log(msg: any, color: string = '', fontWeight: string = 'normal') {
             data = msg.toString()
         }
 
-        // find any http links,
-        const httpLinks = parseHttpLinks(data)
-
         // Format message with theme colors...
         var formattedMessage = data
-
-        // format message with link spans,
-        if (httpLinks && httpLinks.length > 0) {
-            httpLinks.forEach(link => {
-                const linkString = '<a class="mk2console-stream mk2console-link"' 
-                + 'target="_blank" '
-                + 'href="http://'+ link.value + '"'
-                + ' style="color:' 
-                + (color === 'highlight' ? 'var(--highlight)' : 'var(--link)')
-                + ';font-weight:'
-                + fontWeight
-                + ';"' 
-                + '>' + link.value + '</a>'
-
-                formattedMessage = data.slice(0, link.startIndex) 
-                    + linkString 
-                    + data.slice(link.startIndex + link.value.length, data.length)
-            });
-        }
 
         const date = new Date()
         span.innerHTML = (isAnObject ? '' : '>&nbsp;') 
@@ -120,26 +98,6 @@ function log(msg: any, color: string = '', fontWeight: string = 'normal') {
 
         // append new span line to stream.
         stream.appendChild(span)
-}
-
-/**
- * Returns start and end indices of HTTP links from a given text.
- */
-function parseHttpLinks(text: string): {startIndex: number, value: string}[] {
-    // Looks back at a whitespace, grabs any non whitespace character 
-    // before http, www. or .com-like domains if there is and any after until a whitespace.
-    //const httpRegex = /((?<=\s)[\S]+)?(http|www\.|\.com|\.co.uk|\.io|\.org|\.edu).+?(?=\s)/gm
-
-    var results = []
-    //var matches = []
-    //while ((matches = httpRegex.exec(text)) !== null) {
-    //    results.push({
-    //        startIndex: httpRegex.lastIndex - matches[0].length,
-    //        value: matches[0]
-    //    })
-    //}
-
-    return results
 }
 
 export default Mk2Console
